@@ -1,6 +1,5 @@
 """
  Importamos la funcion random para el ataque del Pokemon Oponente
- Pikachu en este caso
 """
 import random
 """
@@ -39,7 +38,6 @@ class Combate:
     def __init__(self, jugador: Pokemon, oponente: Pokemon) -> None:
         self.jugador = jugador
         self.oponente = oponente
-        self.historico = []
         self.pulsa_para_continuar = "\nPulsa ENTER/INTRO para continuar...\n"
 
     def turno_atacar_oponente(self):
@@ -50,15 +48,15 @@ class Combate:
 
     def turno_atacar_jugador(self):
         print("\nAhora es tu turno para atacar. Puedes elegir entre los 3 ataques que tienes disponibles.")
-        elegir_ataque = int(input("Elige que ataque quieres hacer\n"
-                                  "1- Placaje\n"
-                                  "2- Pistola de agua\n"
-                                  "3- Burbuja\n"
-                                  "Tu opción --> "))
         ataques_posibles = list(self.jugador.ataques.values())
+        elegir_ataque = int(input("Elige que ataque quieres hacer\n"
+                                  f"1- {ataques_posibles[0].nombre}\n"
+                                  f"2- {ataques_posibles[1].nombre}\n"
+                                  f"3- {ataques_posibles[2].nombre}\n"
+                                  "Tu opción --> "))
         if 1 <= elegir_ataque <= len(ataques_posibles):
             ataque_jugador = ataques_posibles[elegir_ataque - 1]
-            print(f"¡Lanzas un ataque {ataque_jugador.nombre} y causas {ataque_jugador.poder} puntos de daño a {self.oponente.nombre}.")
+            print(f"¡Lanzas un ataque {ataque_jugador.nombre} y causas {ataque_jugador.poder} puntos de daño a {self.oponente.nombre}!.")
             self.oponente.recibir_ataque(ataque_jugador)
             print(f"A {self.oponente.nombre} le quedan {self.oponente.vida} puntos de vida.")
         else:
@@ -67,7 +65,7 @@ class Combate:
 # Explicación del juego, componentes y dinámica
     def jugar(self):
         print(f"** COMBATE POKEMON -- {self.oponente.nombre} contra {self.jugador.nombre} **")
-        print("Te reto a un combate entre personajes Pokemon. Yo controlo a Pikachu y tú a Squirtle.")
+        print(f"Te reto a un combate entre personajes Pokemon. Yo controlo a {self.oponente.nombre} y tú a {self.jugador.nombre}.")
         print("Combatimos mientras ambos tengamos vida.\n")
         input(self.pulsa_para_continuar)
 
@@ -96,23 +94,24 @@ class Combate:
 
         print("\nEspero volver a verte pronto.")
 
-# Creamos ambos Pokémon
-pikachu = Pokemon("Pikachu", 80)
-pikachu.agregar_ataque("Bola Voltio", 10)
-pikachu.agregar_ataque("Onda Trueno", 11)
-
-squirtle = Pokemon("Squirtle", 90)
-squirtle.agregar_ataque("Placaje", 10)
-squirtle.agregar_ataque("Pistola de agua", 12)
-squirtle.agregar_ataque("Burbuja", 9)
 """
- Creamos el Combate:
+ Creamos un nuevo Combate con dos nuevos Pokemon:
  El primer Pokemon que pasamos como argumento es el del jugador y el segundo el del oponente
 """
+pikachu = Pokemon("Charmander", 130)
+pikachu.agregar_ataque("Arañazo", 40)
+pikachu.agregar_ataque("Gruñido", 0)
+pikachu.agregar_ataque("Ascuas", 40)
+
+squirtle = Pokemon("Bulbasaur", 125)
+squirtle.agregar_ataque("Placaje", 40)
+squirtle.agregar_ataque("Gruñido", 0)
+squirtle.agregar_ataque("Látigo Cepa", 45)
+
 combate = Combate(squirtle, pikachu)
 combate.jugar()
 
 """
-Siguiente Commit Previsto:
-2- Cambiar los valores escritos "a mano" en la función turno_atacar_jugador() por una llamada a los mismos
+ El siguiente Commit propuesto sería cambiar en el método elegir_ataque() las opciones puestas a mano,
+ por introducirlas dentro de un bucle, ya que no sabemos cuántos ataques vamos a definir en la llamada.
 """
