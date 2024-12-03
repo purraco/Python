@@ -98,17 +98,17 @@ class Combate:
  Creamos un nuevo Combate con dos nuevos Pokemon:
  El primer Pokemon que pasamos como argumento es el del jugador y el segundo el del oponente
 """
-pikachu = Pokemon("Charmander", 130)
-pikachu.agregar_ataque("Arañazo", 40)
-pikachu.agregar_ataque("Gruñido", 0)
-pikachu.agregar_ataque("Ascuas", 40)
+charmander = Pokemon("Charmander", 130)
+charmander.agregar_ataque("Arañazo", 40)
+charmander.agregar_ataque("Gruñido", 0)
+charmander.agregar_ataque("Ascuas", 40)
 
-squirtle = Pokemon("Bulbasaur", 125)
-squirtle.agregar_ataque("Placaje", 40)
-squirtle.agregar_ataque("Gruñido", 0)
-squirtle.agregar_ataque("Látigo Cepa", 45)
+bulbasaur = Pokemon("Bulbasaur", 125)
+bulbasaur.agregar_ataque("Placaje", 40)
+bulbasaur.agregar_ataque("Gruñido", 0)
+bulbasaur.agregar_ataque("Látigo Cepa", 45)
 
-combate = Combate(squirtle, pikachu)
+combate = Combate(bulbasaur, charmander)
 combate.jugar()
 
 """
