@@ -12,3 +12,20 @@ https://github.com/pret/pokered/forks
 
 Detalles del Funcionamiento del Juego, explicado en video:
 https://www.youtube.com/watch?v=b-cGPIgxxWg
+
+TIPOS:
+Agua
+Bicho
+Dragón
+Eléctrico
+Fantasma
+Fuego
+Hielo
+Lucha
+Normal
+Planta
+Psíquico
+Roca
+Tierra
+Veneno
+Volador
