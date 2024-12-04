@@ -68,7 +68,18 @@ class Combate:
 
  # Elegimos los Pokemon del Oponente y del Jugador desde la Pokedex eligiendo un número del 1 al 151
     def elegir_pokemon_oponente():
-        elegir_pokemon_oponente = int(input("Elige un pokemon para tu oponente. Del 1 al 151.\n"))
+        # Elegir Pokémon oponente con validación
+        while True:
+            try:
+                elegir_pokemon_oponente = int(input("Elige un pokemon para tu oponente. Del 1 al 151.\n"))
+                # Comprobar si el número está dentro del rango válido
+                if 1 <= elegir_pokemon_oponente <= 151:
+                    break  # Salir del bucle si el número es válido
+                else:
+                    print("¡Número fuera de rango! Elige un número entre 1 y 151.")
+            except ValueError:
+                # Si el usuario introduce algo que no es un número
+                print("¡Por favor ingresa un número válido entre 1 y 151.")
         # Usar zfill para agregar ceros a la izquierda y crear la cadena con #
         elegir_pokemon_oponente = f"#{str(elegir_pokemon_oponente).zfill(3)}"
         pokemon_oponente = Pokemon(pokemon_dict[elegir_pokemon_oponente]['nombre'], 130)
@@ -78,7 +89,18 @@ class Combate:
         return pokemon_oponente
     
     def elegir_pokemon_jugador():
-        elegir_pokemon_jugador = int(input("¡Muy bien!, ahora elige tu Pokemon. Del 1 al 151.\n"))
+        while True:
+            try:
+                elegir_pokemon_jugador = int(input("¡Muy bien!, ahora elige tu Pokemon. Del 1 al 151.\n"))
+                # Comprobar si el número está dentro del rango válido
+                if 1 <= elegir_pokemon_jugador <= 151:
+                    break  # Salir del bucle si el número es válido
+                else:
+                    print("¡Número fuera de rango! Elige un número entre 1 y 151.")
+            except ValueError:
+                # Si el usuario introduce algo que no es un número
+                print("¡Por favor ingresa un número válido entre 1 y 151.")
+        # Usar zfill para agregar ceros a la izquierda y crear la cadena con #
         elegir_pokemon_jugador = f"#{str(elegir_pokemon_jugador).zfill(3)}"
         pokemon_jugador = Pokemon(pokemon_dict[elegir_pokemon_jugador]['nombre'], 130)
         pokemon_jugador.agregar_ataque("Arañazo", 40)
