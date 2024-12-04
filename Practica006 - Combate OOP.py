@@ -3,6 +3,10 @@
 """
 import random
 """
+ Importamos la Pokedex, archivo donde están los Pokemon (nombres y tipos)
+"""
+from Pokedex import pokemon_dict
+"""
  Creamos la clase Ataque con los atributos nombre que guardará el nombre del ataque
  y poder que guardará los puntos de daño de los ataques
 """
@@ -62,6 +66,26 @@ class Combate:
         else:
             print("¡Has perdido el turno! No elegiste un ataque válido.")
 
+ # Elegimos los Pokemon del Oponente y del Jugador desde la Pokedex eligiendo un número del 1 al 151
+    def elegir_pokemon_oponente():
+        elegir_pokemon_oponente = int(input("Elige un pokemon para tu oponente. Del 1 al 151.\n"))
+        # Usar zfill para agregar ceros a la izquierda y crear la cadena con #
+        elegir_pokemon_oponente = f"#{str(elegir_pokemon_oponente).zfill(3)}"
+        pokemon_oponente = Pokemon(pokemon_dict[elegir_pokemon_oponente]['nombre'], 130)
+        pokemon_oponente.agregar_ataque("Placaje", 40)
+        pokemon_oponente.agregar_ataque("Gruñido", 0)
+        pokemon_oponente.agregar_ataque("Látigo Cepa", 45)
+        return pokemon_oponente
+    
+    def elegir_pokemon_jugador():
+        elegir_pokemon_jugador = int(input("¡Muy bien!, ahora elige tu Pokemon. Del 1 al 151.\n"))
+        elegir_pokemon_jugador = f"#{str(elegir_pokemon_jugador).zfill(3)}"
+        pokemon_jugador = Pokemon(pokemon_dict[elegir_pokemon_jugador]['nombre'], 130)
+        pokemon_jugador.agregar_ataque("Arañazo", 40)
+        pokemon_jugador.agregar_ataque("Gruñido", 0)
+        pokemon_jugador.agregar_ataque("Ascuas", 40)
+        return pokemon_jugador
+
 # Explicación del juego, componentes y dinámica
     def jugar(self):
         print(f"** COMBATE POKEMON -- {self.oponente.nombre} contra {self.jugador.nombre} **")
@@ -71,47 +95,30 @@ class Combate:
 
         while self.jugador.vida > 0 and self.oponente.vida > 0:
             self.turno_atacar_oponente()
-
             if self.jugador.vida == 0:
                 break
-
             input(self.pulsa_para_continuar)
             self.turno_atacar_jugador()
-
             if self.oponente.vida == 0:
                 break
-
             input(self.pulsa_para_continuar)
-
             print("\nResumen del combate:")
             print(f"Te quedan {self.jugador.vida} puntos de vida.")
             print(f"A {self.oponente.nombre} le quedan {self.oponente.vida} puntos de vida.")
-        
         if self.jugador.vida == 0:
             print(f"\nLo siento, pero {self.oponente.nombre} te ha ganado.")
         if self.oponente.vida == 0:
             print(f"\n¡ENHORABUENA! Has derrotado a {self.oponente.nombre}.")
-
         print("\nEspero volver a verte pronto.")
-
 """
  Creamos un nuevo Combate con dos nuevos Pokemon:
  El primer Pokemon que pasamos como argumento es el del jugador y el segundo el del oponente
 """
-charmander = Pokemon("Charmander", 130)
-charmander.agregar_ataque("Arañazo", 40)
-charmander.agregar_ataque("Gruñido", 0)
-charmander.agregar_ataque("Ascuas", 40)
-
-bulbasaur = Pokemon("Bulbasaur", 125)
-bulbasaur.agregar_ataque("Placaje", 40)
-bulbasaur.agregar_ataque("Gruñido", 0)
-bulbasaur.agregar_ataque("Látigo Cepa", 45)
-
-combate = Combate(bulbasaur, charmander)
+combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_oponente())
 combate.jugar()
 
 """
- El siguiente Commit propuesto sería cambiar en el método elegir_ataque() las opciones puestas a mano,
- por introducirlas dentro de un bucle, ya que no sabemos cuántos ataques vamos a definir en la llamada.
+ Siguientes Commits propuestos:
+  - Cambiar en el método elegir_ataque() las opciones puestas a mano,
+  - Controlar la entrada del usuario de modo que se garantice que el jugador elija un número válido entre 1 y 151
 """
